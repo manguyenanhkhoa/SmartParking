@@ -23,6 +23,15 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
+app.UseSwagger();
+app.UseSwaggerUI();
+
+app.UseCors("Frontend");
+
+app.MapControllers();
+
+app.Run();
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
