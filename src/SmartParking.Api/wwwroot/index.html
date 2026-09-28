@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Smart Parking — Bảng điều khiển</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2218%22 fill=%22%2316213A%22/><text x=%2250%22 y=%2270%22 font-family=%22Arial%22 font-weight=%22900%22 font-size=%2260%22 fill=%22%23F2A93B%22 text-anchor=%22middle%22>P</text></svg>" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<div class="scanlines" aria-hidden="true"></div>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark">P</span>
+    <div class="brand-text">
+      <span class="brand-name">Smart Parking</span>
+      <span class="brand-sub">Bảng điều khiển bãi đỗ</span>
+    </div>
+  </div>
+  <div class="topbar-right">
+    <div class="clock" id="clock">--:--:--</div>
+    <div class="conn" id="connStatus" data-state="connecting">
+      <span class="conn-dot"></span>
+      <span class="conn-label">Đang kết nối…</span>
+    </div>
+  </div>
+</header>
+
+<main class="layout">
+
+  <section class="stats">
+    <div class="stat-card">
+      <span class="stat-label">Tổng số chỗ</span>
+      <span class="stat-value" id="statTotal">0</span>
+    </div>
+    <div class="stat-card stat-available">
+      <span class="stat-label">Đang trống</span>
+      <span class="stat-value" id="statAvailable">0</span>
+    </div>
+    <div class="stat-card stat-occupied">
+      <span class="stat-label">Đã có xe</span>
+      <span class="stat-value" id="statOccupied">0</span>
+    </div>
+    <div class="stat-card stat-reserved">
+      <span class="stat-label">Đã đặt trước</span>
+      <span class="stat-value" id="statReserved">0</span>
+    </div>
+  </section>
+
+  <section class="board-wrap">
+    <div class="board-header">
+      <h1>Sơ đồ chỗ đỗ</h1>
+      <p>Bấm vào một chỗ để đổi trạng thái — thay đổi được phát tới mọi người đang xem qua SignalR.</p>
+    </div>
+    <div class="legend">
+      <span class="legend-item"><i class="dot dot-available"></i>Trống</span>
+      <span class="legend-item"><i class="dot dot-occupied"></i>Có xe</span>
+      <span class="legend-item"><i class="dot dot-reserved"></i>Đặt trước</span>
+    </div>
+    <div id="board" class="board">
+      <div class="board-empty" id="boardEmpty">Đang tải dữ liệu chỗ đỗ…</div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <span id="lastUpdated">Chưa có dữ liệu</span>
+    <span class="foot-sep">·</span>
+    <span>Nguồn: <code>GET /api/parking/slots</code></span>
+    <span class="foot-sep">·</span>
+    <a href="/swagger" class="foot-link">Xem API (Swagger)</a>
+  </footer>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@microsoft/signalr@8.0.0/dist/browser/signalr.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
